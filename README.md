@@ -42,6 +42,11 @@ psql -d ducklake_catalog -f sql/enable_rls.sql
 
 ### S3 data layer
 
+> **Warning:** Hetzner Object Storage has no IAM. The reader key can call
+> `PutBucketPolicy` to remove its own restrictions and escalate to full write
+> access. Bucket policies only restrict object-level operations — policy
+> management bypasses them entirely. See [research/s3-blast-radius.md](research/s3-blast-radius.md).
+
 Restrict an S3 reader key to `GetObject` on a single table prefix. See [research/s3-access-control.md](research/s3-access-control.md) for how the bucket policy works.
 
 ```bash
